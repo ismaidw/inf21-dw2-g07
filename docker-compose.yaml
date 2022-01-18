@@ -31,7 +31,7 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 3006:3006
+      - 3006:3000
     networks:
       - my-network-lb4
 
