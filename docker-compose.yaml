@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  mysql:
+    container_name: lb4-mysql
+    image: meloana/inf21dw1g07:mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root      
+    networks:
+      - my-network-lb4
+    ports:
+      - 3306:3306
+  lb4:
+    depends_on:
+      - mysql
+    container_name: lb4
+    image: meloana/inf21dw1g07:lb4
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    networks:
+      - my-network-lb4
+  film:
+    depends_on:
+      - lb4
+    container_name: lb4
+    image: meloana/inf21dw1g07:film
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3006:3006
+    networks:
+      - my-network-lb4
+
+networks:
+  my-network-lb4:
