@@ -12,7 +12,7 @@ services:
       - my-network-lb4
     ports:
       - 3306:3306
-  lb4:
+  app:
     depends_on:
       - mysql
     container_name: lb4-app
@@ -25,7 +25,7 @@ services:
       - my-network-lb4
   film:
     depends_on:
-      - lb4
+      - app
     container_name: film-app
     image: meloana/inf21dw1g07:film
     environment:
